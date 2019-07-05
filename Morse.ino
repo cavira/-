@@ -1,5 +1,5 @@
 #include "Morse.h"
-char x;
+char A;
 Morse morse(8);
  
 void setup()
@@ -11,9 +11,9 @@ void loop()
 {
   if(Serial.available()>0)
   {
-      x = char(Serial.read());
+      A = char(Serial.read());
          
-  switch(x)
+  switch(A)
     {
     case 'a':
     case 'A':morse.dot();morse.dash();break;
@@ -67,7 +67,7 @@ void loop()
     case 'Y':morse.dash();morse.dot();morse.dash();morse.dash();break;
     case 'z':
     case 'Z':morse.dash();morse.dash();morse.dot();morse.dot();break;
-    case ' ':break;
+    case ' ':delay(2000);break;
     }
   }
 }
