@@ -1,21 +1,19 @@
 #include "Morse.h"
-char x;
-Morse morse(13);
+char A;
+Morse morse(8);//以8管脚作为输出
  
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(9600);//传输波特率
 }
  
 void loop()
 {
   if(Serial.available()>0)
-    {
-      x = char(Serial.read());
-    
-    
-  switch(x)
-  {
+ {
+      A = char(Serial.read());//A赋值串口输入
+   switch(A)//判断串口输入并执行相应操作
+   {
     case 'a':
     case 'A':morse.dot();morse.dash();break;
     case 'b':
@@ -68,8 +66,7 @@ void loop()
     case 'Y':morse.dash();morse.dot();morse.dash();morse.dash();break;
     case 'z':
     case 'Z':morse.dash();morse.dash();morse.dot();morse.dot();break;
-    case ' ':break;
-    case '\n':break;
-  }
-    }
+    case ' ':delay(2000);break;
+   }
+ }
 }
