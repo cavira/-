@@ -1,95 +1,73 @@
-#define _dottime 1000//设置时间为1000ms
-int led = 8;
-char letter;
-
-void setup() 
+#include "Morse.h"
+char x;
+Morse morse(8);
+ 
+void setup()
 {
-    pinMode(led, OUTPUT);//配置输出口
-    Serial.begin(9600);//设置传输波特率
+  Serial.begin(9600);
 }
-
-void loop() 
+ 
+void loop()
 {
-    if(Serial.available())
-    {
-      letter = Serial.read();
-      Morse_Led(letter,led);
-    }
-}
-
-void Morse_Led(int pin,char letter)//定义每个字母所对应摩尔斯电码
-{
-  switch(letter)
+  if(Serial.available()>0)
   {
+      x = char(Serial.read());
+         
+  switch(x)
+    {
     case 'a':
-    case 'A':Morse_dot(pin);Morse_dash(pin);break;
+    case 'A':morse.dot();morse.dash();break;
     case 'b':
-    case 'B':Morse_dash(pin);Morse_dot(pin);Morse_dot(pin);Morse_dot(pin);break;
+    case 'B':morse.dash();morse.dot();morse.dot();morse.dot();break;
     case 'c':
-    case 'C':Morse_dash(pin);Morse_dot(pin);Morse_dash(pin);Morse_dot(pin);break;
+    case 'C':morse.dash();morse.dot();morse.dash();morse.dot();break;
     case 'd':
-    case 'D':Morse_dash(pin);Morse_dot(pin);Morse_dot(pin);break;
+    case 'D':morse.dash();morse.dot();morse.dot();break;
     case 'e':
-    case 'E':Morse_dot(pin);break;
+    case 'E':morse.dot();break;
     case 'f':
-    case 'F':Morse_dot(pin);Morse_dot(pin);Morse_dash(pin);Morse_dot(pin);break;
+    case 'F':morse.dot();morse.dot();morse.dash();morse.dot();break;
     case 'g':
-    case 'G':Morse_dash(pin);Morse_dash(pin);Morse_dot(pin);break;
+    case 'G':morse.dash();morse.dash();morse.dot();break;
     case 'h':
-    case 'H':Morse_dot(pin);Morse_dot(pin);Morse_dot(pin);Morse_dot(pin);break;
+    case 'H':morse.dot();morse.dot();morse.dot();morse.dot();break;
     case 'i':
-    case 'I':Morse_dot(pin);Morse_dot(pin);break;
+    case 'I':morse.dot();morse.dot();break;
     case 'j':
-    case 'J':Morse_dot(pin);Morse_dash(pin);Morse_dash(pin);Morse_dash(pin);break;
+    case 'J':morse.dot();morse.dash();morse.dash();morse.dash();break;
     case 'k':
-    case 'K':Morse_dash(pin);Morse_dot(pin);Morse_dash(pin);break;
+    case 'K':morse.dash();morse.dot();morse.dash();break;
     case 'l':
-    case 'L':Morse_dot(pin);Morse_dash(pin);Morse_dot(pin);Morse_dot(pin);break;
+    case 'L':morse.dot();morse.dash();morse.dot();morse.dot();break;
     case 'm':
-    case 'M':Morse_dash(pin);Morse_dash(pin);break;
+    case 'M':morse.dash();morse.dash();break;
     case 'n':
-    case 'N':Morse_dash(pin);Morse_dot(pin);break;
+    case 'N':morse.dash();morse.dot();break;
     case 'o':
-    case 'O':Morse_dash(pin);Morse_dash(pin);Morse_dash(pin);break;
+    case 'O':morse.dash();morse.dash();morse.dash();break;
     case 'p':
-    case 'P':Morse_dot(pin);Morse_dash(pin);Morse_dash(pin);Morse_dot(pin);break;
+    case 'P':morse.dot();morse.dash();morse.dash();morse.dot();break;
     case 'q':
-    case 'Q':Morse_dash(pin);Morse_dash(pin);Morse_dot(pin);Morse_dash(pin);break;
+    case 'Q':morse.dash();morse.dash();morse.dot();morse.dash();break;
     case 'r':
-    case 'R':Morse_dot(pin);Morse_dash(pin);Morse_dot(pin);break;
+    case 'R':morse.dot();morse.dash();morse.dot();break;
     case 's':
-    case 'S':Morse_dot(pin);Morse_dash(pin);Morse_dot(pin);break;
+    case 'S':morse.dot();morse.dash();morse.dot();break;
     case 't':
-    case 'T':Morse_dash(pin);break;
+    case 'T':morse.dash();break;
     case 'u':
-    case 'U':Morse_dot(pin);Morse_dot(pin);Morse_dash(pin);break;
+    case 'U':morse.dot();morse.dot();morse.dash();break;
     case 'v':
-    case 'V':Morse_dot(pin);Morse_dot(pin);Morse_dot(pin);Morse_dash(pin);break;
+    case 'V':morse.dot();morse.dot();morse.dot();morse.dash();break;
     case 'w':
-    case 'W':Morse_dot(pin);Morse_dash(pin);Morse_dash(pin);break;
+    case 'W':morse.dot();morse.dash();morse.dash();break;
     case 'x':
-    case 'X':Morse_dash(pin);Morse_dot(pin);Morse_dot(pin);Morse_dash(pin);break;
+    case 'X':morse.dash();morse.dot();morse.dot();morse.dash();break;
     case 'y':
-    case 'Y':Morse_dash(pin);Morse_dot(pin);Morse_dash(pin);Morse_dash(pin);break;
+    case 'Y':morse.dash();morse.dot();morse.dash();morse.dash();break;
     case 'z':
-    case 'Z':Morse_dash(pin);Morse_dash(pin);Morse_dot(pin);Morse_dot(pin);break;
+    case 'Z':morse.dash();morse.dash();morse.dot();morse.dot();break;
     case ' ':break;
-    case '\n':break;
-  };
-}
-
-void Morse_dot(int _pin)
-{
-  digitalWrite(_pin,HIGH);
-  delay(_dottime);
-  digitalWrite(_pin,LOW);
-  delay(_dottime);
-}
-
-void Morse_dash(int _pin)
-{
-  digitalWrite(_pin,HIGH);
-  delay(_dottime*4);
-  digitalWrite(_pin,LOW);
-  delay(_dottime);
+    }
+  }
 }
